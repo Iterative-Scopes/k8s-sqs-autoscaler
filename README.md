@@ -7,18 +7,18 @@ Create a kubernetes deployment like this:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: my-k8s-autoscaler
+  name: k8s-sqs-autoscaler
 spec:
   revisionHistoryLimit: 1
   replicas: 1
   template:
     metadata:
       labels:
-        app: my-k8s-autoscaler
+        app: k8s-sqs-autoscaler
     spec:
       containers:
-      - name: my-k8s-autoscaler
-        image: sideshowbandana/k8s-sqs-autoscaler:1.0.0
+      - name: k8s-sqs-autoscaler
+        image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/k8s-sqs-autoscaler:latest
         command:
           - ./k8s-sqs-autoscaler
           - --sqs-queue-url=https://sqs.$(AWS_REGION).amazonaws.com/$(AWS_ID)/$(SQS_QUEUE) # required
