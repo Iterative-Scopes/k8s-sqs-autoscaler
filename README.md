@@ -4,47 +4,56 @@ Kubernetes pod autoscaler based on queue size in AWS SQS
 ## Usage
 Create a kubernetes deployment like this:
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s-sqs-autoscaler
+  name: redaction-sqs-auto-scaler
 spec:
-  revisionHistoryLimit: 1
   replicas: 1
+  selector:
+    matchLabels:
+      app: redaction-sqs-auto-scaler
   template:
     metadata:
       labels:
-        app: k8s-sqs-autoscaler
+        app: redaction-sqs-auto-scaler
     spec:
+      serviceAccountName: data-service-account
       containers:
-      - name: k8s-sqs-autoscaler
+      - name: redaction-sqs-auto-scaler
         image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/k8s-sqs-autoscaler:latest
         command:
-          - ./k8s-sqs-autoscaler
-          - --sqs-queue-url=https://sqs.$(AWS_REGION).amazonaws.com/$(AWS_ID)/$(SQS_QUEUE) # required
-          - --kubernetes-deployment=$(KUBERNETES_DEPLOYMENT)
-          - --kubernetes-namespace=$(K8S_NAMESPACE) # optional
-          - --aws-region=us-west-2  #required
-          - --poll-period=10 # optional
-          - --scale-down-cool-down=30 # optional
-          - --scale-up-cool-down=10 # optional
-          - --scale-up-messages=20 # optional
-          - --scale-down-messages=10 # optional
-          - --max-pods=30 # optional
-          - --min-pods=1 # optional
+            - ./k8s-sqs-autoscaler
+            - --sqs-queue-url=https://sqs.us-east-1.amazonaws.com/691195436300/casemaker_redaction_dev
+            - --kubernetes-deployment=redaction_service
+            - --kubernetes-deployment-file=../services/redaction_service.yaml
+            - --kubernetes-namespace=default
+            - --aws-region=us-east-1
+            - --poll-period=10 # optional
+            - --scale-down-cool-down=300000000000 # optional
+            - --scale-up-cool-down=10 # optional
+            - --scale-up-messages=1 # optional
+            - --scale-down-messages=0 # optional
+            - --max-pods=30 # optional
+            - --min-pods=0 # optional
         env:
-          - name: K8S_NAMESPACE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.namespace
+            -
+                name: AWS_DEFAULT_REGION
+                value: us-east-1
+            # - name: geo
+            #   valueFrom:
+            #     fieldRef:
+            #       fieldPath: metadata.namespace
         resources:
           requests:
             memory: "64Mi"
             cpu: "250m"
           limits:
-            memory: "1512Mi"
+            memory: "256Mi"
             cpu: "500m"
         ports:
         - containerPort: 80
+      # nodeSelector:
+      #   nodeType: master
 
 ```
