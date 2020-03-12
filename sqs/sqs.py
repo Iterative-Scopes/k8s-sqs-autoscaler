@@ -56,6 +56,7 @@ class SQSPoller:
         logger.info("creating a new deployment")
         #TODO create a deployment
         with open(os.path.join(os.path.dirname(__file__), self.options.kubernetes_deployment_file)) as f:
+            logger.info("using deployment file {}")
             dep = yaml.safe_load(f)
             k8s_apps_v1 = client.AppsV1Api()
             resp = k8s_apps_v1.create_namespaced_deployment(
