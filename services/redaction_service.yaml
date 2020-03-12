@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redaction-service
+  labels:
+    app: redaction-service
+spec:
+  selector:
+    matchLabels:
+      app: redaction-service
+  template:
+    metadata:
+      labels:
+        app: redaction-service
+    spec:
+      # serviceAccountName: data-service-account
+      containers:
+        - 
+          name: redaction-service
+          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/redaction:latest
+          resources:
+            limits: 
+              cpu: 1500m
+              memory: 3000Mi
+            requests:
+              cpu: 1500m
+              memory: 3000Mi
+          env:
+            - 
+              name: ENV
+              value: "dev" 
+            - 
+              name: GIT_BRANCH
+              value: "malden-center-dev-debug"
+      nodeSelector:
+        nodeType: worker
