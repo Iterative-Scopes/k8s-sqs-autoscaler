@@ -16,15 +16,15 @@ spec:
       containers:
         -
           name: procedure-detection-service
-          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/procedure_detection:fix-ISCD-3331
+          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/procedure_detection:ISCD-3331
           imagePullPolicy: Always
           resources:
             limits:
-              cpu: 3
-              memory: 7Gi
+              cpu: 2
+              memory: 6Gi
             requests:
-              cpu: 3
-              memory: 7Gi
+              cpu: 2
+              memory: 6Gi
           env:
             -
               name: ENV
