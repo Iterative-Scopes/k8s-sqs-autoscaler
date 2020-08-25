@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redaction-service
+  labels:
+    app: redaction-service
+spec:
+  selector:
+    matchLabels:
+      app: redaction-service
+  template:
+    metadata:
+      labels:
+        app: redaction-service
+    spec:
+      # serviceAccountName: data-service-account
+      containers:
+        -
+          name: redaction-service
+          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/redaction:ISCD-3331
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 3
+              memory: 7Gi
+            requests:
+              cpu: 3
+              memory: 7Gi
+          env:
+            -
+              name: ENV
+              value: "dev"

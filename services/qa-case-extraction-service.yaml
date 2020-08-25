@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: case-extraction-service
+  labels:
+    app: case-extraction-service
+spec:
+  selector:
+    matchLabels:
+      app: case-extraction-service
+  template:
+    metadata:
+      labels:
+        app: case-extraction-service
+    spec:
+      # serviceAccountName: data-service-account
+      containers:
+        -
+          name: case-extraction-service
+          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/case_extraction:ISCD-3331
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 3
+              memory: 7Gi
+            requests:
+              cpu: 3
+              memory: 7Gi
+          env:
+            -
+              name: ENV
+              value: "qa"
