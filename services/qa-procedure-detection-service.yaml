@@ -20,12 +20,14 @@ spec:
           imagePullPolicy: Always
           resources:
             limits:
-              cpu: 2
+              cpu: 3
               memory: 6Gi
             requests:
-              cpu: 2
+              cpu: 3
               memory: 6Gi
           env:
             -
               name: ENV
               value: "qa"
+      nodeSelector:
+        nodeType: worker
