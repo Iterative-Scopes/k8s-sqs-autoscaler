@@ -88,6 +88,7 @@ node('Jenkins-Backend-Slave') {
                   sudo chown -R ubuntu:ubuntu ~/.npm
                   sudo chown -R ubuntu:ubuntu ~/.config
 
+                  sudo snap install docker
                   sudo chmod 777 /var/run/docker.sock || true
                 """
 
