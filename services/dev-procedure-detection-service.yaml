@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: procedure-detection-service
+  labels:
+    app: procedure-detection-service
+spec:
+  selector:
+    matchLabels:
+      app: procedure-detection-service
+  template:
+    metadata:
+      labels:
+        app: procedure-detection-service
+    spec:
+      containers:
+        -
+          name: procedure-detection-service
+          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/procedure_detection:ISCD-3451
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 3
+              memory: 6Gi
+            requests:
+              cpu: 3
+              memory: 6Gi
+          env:
+            -
+              name: ENV
+              value: "dev"
+      nodeSelector:
+        nodeType: worker
