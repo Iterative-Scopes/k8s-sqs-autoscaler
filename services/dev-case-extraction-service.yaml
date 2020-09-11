@@ -13,7 +13,6 @@ spec:
       labels:
         app: case-extraction-service
     spec:
-      # serviceAccountName: data-service-account
       containers:
         -
           name: case-extraction-service
