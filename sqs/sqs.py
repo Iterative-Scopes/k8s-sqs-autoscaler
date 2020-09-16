@@ -27,9 +27,17 @@ class SQSPoller:
         )
         return int(response['Attributes']['ApproximateNumberOfMessages'])
 
+    def message_in_flight_count(self):
+        response_inflight = self.sqs_client.get_queue_attributes(
+            QueueUrl=self.options.sqs_queue_url,
+            AttributeNames=['ApproximateNumberOfMessagesNotVisible']
+        )
+        return int(response_inflight['Attributes']['ApproximateNumberOfMessagesNotVisible'])
+
 
     def poll(self):
         message_count = self.message_count()
+        message_in_flight_count = self.message_in_flight_count()
         t = time()
         if  message_count >= self.options.scale_up_messages:
             if t - self.last_scale_up_time > self.options.scale_up_cool_down:
@@ -42,7 +50,7 @@ class SQSPoller:
                 self.last_scale_up_time = t
             else:
                 logger.info("Waiting for scale up cooldown")
-        if message_count <= self.options.scale_down_messages:
+        if message_in_flight_count <= self.options.scale_down_messages:
             if t - self.last_scale_down_time > self.options.scale_down_cool_down:
                 self.scale_down()
                 self.last_scale_down_time = t
@@ -60,7 +68,7 @@ class SQSPoller:
             dep = yaml.safe_load(f)
             k8s_apps_v1 = client.AppsV1Api()
             resp = k8s_apps_v1.create_namespaced_deployment(
-                body=dep, 
+                body=dep,
                 namespace=self.options.kubernetes_namespace
             )
             logger.info("Deployment created. status='%s'" % resp.metadata.name)
@@ -115,4 +123,3 @@ def run(options):
     sqs_queue_url is set as as part of k8s deployment env variable
     """
     SQSPoller(options).run()
-
