@@ -29,5 +29,5 @@ spec:
             -
               name: ENV
               value: "qa"
-      nodeSelector:
-        nodeType: worker
+      #nodeSelector:
+      #  nodeType: qa-casemaker-worker

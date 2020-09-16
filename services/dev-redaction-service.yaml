@@ -30,5 +30,5 @@ spec:
             -
               name: ENV
               value: "dev"
-      nodeSelector:
-        nodeType: worker
+      #nodeSelector:
+      #  nodeType: dev-casemaker-worker
