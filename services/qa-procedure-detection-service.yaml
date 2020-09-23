@@ -16,7 +16,7 @@ spec:
       containers:
         -
           name: procedure-detection-service
-          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/procedure_detection:master
+          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/procedure_detection:fix-roxbury-xing-dev
           imagePullPolicy: Always
           resources:
             limits:
@@ -29,5 +29,3 @@ spec:
             -
               name: ENV
               value: "qa"
-      nodeSelector:
-        nodeType: worker
