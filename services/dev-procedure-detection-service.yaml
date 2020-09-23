@@ -16,7 +16,7 @@ spec:
       containers:
         -
           name: procedure-detection-service
-          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/procedure_detection:fix-roxbury-xing-dev
+          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/procedure_detection:master
           imagePullPolicy: Always
           resources:
             limits:
