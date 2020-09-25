@@ -40,10 +40,6 @@ spec:
             -
                 name: AWS_DEFAULT_REGION
                 value: us-east-1
-            # - name: geo
-            #   valueFrom:
-            #     fieldRef:
-            #       fieldPath: metadata.namespace
         resources:
           requests:
             memory: "64Mi"
@@ -53,7 +49,7 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 80
-      # nodeSelector:
-      #   nodeType: master
+        nodeSelector:
+          nodeType: master
 
 ```
