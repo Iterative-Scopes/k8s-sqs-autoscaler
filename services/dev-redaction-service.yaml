@@ -17,7 +17,7 @@ spec:
       containers:
         -
           name: redaction-service
-          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/redaction:master
+          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/redaction:feature-ISCD-3818-update-lm-video-visibility-timeout
           imagePullPolicy: Always
           resources:
             limits:
