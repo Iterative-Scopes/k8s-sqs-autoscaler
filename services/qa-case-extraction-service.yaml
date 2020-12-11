@@ -17,7 +17,7 @@ spec:
       containers:
         -
           name: case-extraction-service
-          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/case_extraction:master
+          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/case_extraction:feature-ISCD-3852-ibd-stage-1-clips-direct-upload
           imagePullPolicy: Always
           resources:
             limits:
