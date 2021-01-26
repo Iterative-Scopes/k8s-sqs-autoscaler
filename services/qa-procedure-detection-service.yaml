@@ -16,7 +16,7 @@ spec:
       containers:
         -
           name: procedure-detection-service
-          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/procedure_detection:master
+          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/procedure_detection:feature-ISCD-3654-admin-review-dashboard-2
           imagePullPolicy: Always
           resources:
             limits:
