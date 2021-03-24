@@ -17,7 +17,7 @@ spec:
       containers:
         -
           name: redaction-service
-          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/redaction:master
+          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/redaction:21.5-kenmore-hotfix
           imagePullPolicy: Always
           resources:
             limits:
