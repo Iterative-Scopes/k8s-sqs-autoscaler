@@ -17,7 +17,7 @@ spec:
       containers:
         -
           name: case-extraction-service
-          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/case_extraction:master
+          image: 691195436300.dkr.ecr.us-east-1.amazonaws.com/case_extraction:fix-ISCD-4082-remove-is-logging-from-decomp
           imagePullPolicy: Always
           resources:
             limits:
